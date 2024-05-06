@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    /* align-items: center; */
+    width: 500px;
+    gap: 26px;
+    /* height: 191px; */
+    padding-left: 39%;
+    padding-top: 20px;
+}
+.loginform{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    /* align-items: center; */
+    width: 500px;
+    gap: 26px;
+    /* height: 191px; */
+    padding-left: 39%;
+    padding-top: 20px;
+}

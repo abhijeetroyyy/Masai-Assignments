@@ -1,0 +1,10 @@
+input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+         -webkit-appearance: none;
+      }
+.btn button{
+    margin: 10px 10px 10px 10px;
+}
+.btn{
+    padding-left: 55px;
+}
