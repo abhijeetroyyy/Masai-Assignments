@@ -12,7 +12,8 @@
     <script type="text/babel">
       // Your JSX code here
       let root = document.getElementById("root");
-      let Element=<p>Seize the day</p>
+      let flag = true
+      let Element= flag? <p>Seize the day</p>:<p>Good Day</p>
       const reactRoot = ReactDOM.createRoot(root)
       reactRoot.render(Element)
     </script>

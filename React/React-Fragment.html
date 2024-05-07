@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <title>JSX and Babel</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="root"></div>
     <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-      // Your JSX code here
+        // Your JSX code here
+        let root = document.getElementById("root");
+        function handelclick() {
+            alert("Hello")
+        }
+        let element = <>
+            <p>React is a javascript library</p>
+            <div className="main">
+                <p>click the below button to get hello</p>
+                <button onClick={handelclick}>Alert Hello</button>
+            </div>
+        </>
+        const reactRoot = ReactDOM.createRoot(root);
+        reactRoot.render(element)
     </script>
-  </body>
+</body>
+
 </html>
