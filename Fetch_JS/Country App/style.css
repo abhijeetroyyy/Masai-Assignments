@@ -1,0 +1,15 @@
+.contrydiv{
+    /* border: 1px solid black; */
+    border-radius: 23px;
+    width: 40%;
+    height: 200px;
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 10px;
+    margin-left: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.contrydiv>h4{
+    padding-top: 24px;
+}
