@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      function TodoList() {
+        const [todos, setTodos] = React.useState([]);
+        const [newTodo, setNewTodo] = React.useState("");
+        const [newTodoDescription, setNewTodoDescription] = React.useState("");
+
+        const addTodo = () => {
+          if (newTodo.trim() !== "") {
+            setTodos([
+              ...todos,
+              {
+                id: Date.now(),
+                text: newTodo,
+                description: newTodoDescription,
+                completed: false,
+              },
+            ]);
+            setNewTodo("");
+            setNewTodoDescription("");
+          }
+        };
+
+        const toggleTodo = (id) => {
+          setTodos((prevTodos) => {
+            return prevTodos.map((todo) => {
+              if (todo.id === id) {
+                return {
+                  ...todo,
+                  completed: !todo.completed,
+                };
+              }
+              return todo;
+            });
+          });
+        };
+
+        const removeTodo = (id) => {
+          setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+        };
+
+        return (
+          <>
+            <h1 style={{ textAlign: "center" }}>Todo App</h1>
+            <div
+              style={{
+                textAlign: "center",
+                margin: "10px",
+                display: "flex",
+                justifyContent: "center",
+                gap: "13px",
+                alignItem: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <input
+                style={{ textAlign: "center" }}
+                type="text"
+                value={newTodo}
+                onChange={(e) => setNewTodo(e.target.value)}
+                placeholder="Enter Title"
+              />
+              <input
+                style={{ textAlign: "center" }}
+                type="text"
+                value={newTodoDescription}
+                onChange={(e) => setNewTodoDescription(e.target.value)}
+                placeholder="Enter Description"
+              />
+              <button onClick={addTodo}>Add Todo</button>
+            </div>
+            <hr />
+            
+                <th style={{display:"flex", gap:"10px"}}>
+                    <td>S.no</td>
+                    <td>Title</td>
+                    <td style={{marginLest:"40px"}}>Description</td>
+                    <td>Action</td>
+                    <td>Status</td>
+                    </th>
+                    <ol>
+              {todos.map((todo) => (
+                <li key={todo.id}>
+                    <span style={{margin:"10px"}}>{todo.text}</span>
+                    <span style={{margin:"10px"}}>{todo.description}</span>
+                    <button style={{margin:"10px"}} onClick={() => removeTodo(todo.id)}>Delete</button>
+                    <input
+                      type="checkbox"
+                      checked={todo.completed}
+                      onChange={() => toggleTodo(todo.id)}
+                    />
+                  </li>
+                ))}
+                </ol>
+          </>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<TodoList />);
+    </script>
+  </body>
+</html>
