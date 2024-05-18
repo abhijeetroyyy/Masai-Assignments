@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      function Quiz() {
+        const [count, setCount] = React.useState(0);
+
+        const handleClick = () => {
+          const correctAnswers = {
+            question1: "1",
+            question2: "1",
+            question3: "1"
+          };
+
+          let score = 0;
+
+          for (let i = 1; i <= 3; i++) {
+            const selectedAnswer = document.querySelector(`input[name="question${i}"]:checked`);
+            if (selectedAnswer && selectedAnswer.value === correctAnswers[`question${i}`]) {
+              score++;
+            }
+          }
+
+          setCount(score);
+
+          const radioInputs = document.querySelectorAll('input[type="radio"]');
+          radioInputs.forEach(input => {
+            input.checked = false;
+          });
+        };
+
+        const reset = () => {
+          setCount(0);
+        };
+
+        return (
+          <>
+            <h1>Quiz</h1>
+            <p>1. What is the color of RCB jersey</p>
+            <input type="radio" name="question1" value="1" /> RED
+            <input type="radio" name="question1" value="2" /> BLUE
+            <input type="radio" name="question1" value="3" /> PINK
+            <p>2. Who won the IPL 2023</p>
+            <input type="radio" name="question2" value="1" /> CSK
+            <input type="radio" name="question2" value="2" /> RCB
+            <input type="radio" name="question2" value="3" /> MI
+            <p>3. Who is the King of Cricket</p>
+            <input type="radio" name="question3" value="1" /> Virat Kohli
+            <input type="radio" name="question3" value="2" /> Sachin Tendulkar
+            <input type="radio" name="question3" value="3" /> Rohit Sharma
+            <br />
+            <button style={{ marginBottom: "10px" }} onClick={handleClick}>Submit</button>
+            <br />
+            <button style={{ padding: "5px" }} onClick={reset}>Reset</button>
+            <h1>Your score is {count}</h1>
+          </>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<Quiz />);
+    </script>
+  </body>
+</html>
