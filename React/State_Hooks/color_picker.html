@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color Picker</title>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+  const ColorPicker = () => {
+    const [color, setColor] = React.useState('#');
+    const [inputValue, setInputValue] = React.useState('#');
+
+    const handleColorChange = (e) => {
+      const value = e.target.value;
+      setInputValue(value);
+      setColor(value);
+    };
+
+    return (
+      <div>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={handleColorChange}
+            style={{ marginBottom: '10px' }}
+          />
+        <div
+          style={{
+            width: '100px',
+            height: '100px',
+            backgroundColor: color,
+            marginTop: '10px',
+          }}
+        ></div>
+      </div>
+    );
+  };
+
+  ReactDOM.createRoot(document.getElementById("root")).render(<ColorPicker />);
+</script>
+</html>
