@@ -1,0 +1,14 @@
+{
+  "todos": [
+    {
+      "title": "Abhijeet",
+      "status": false,
+      "id": 1
+    },
+    {
+      "title": "1st task",
+      "status": true,
+      "id": 2
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/babel">
+      function App() {
+        const [inputData, setInputData] = React.useState("");
+        const [data, setData] = React.useState([]);
+        function GetData() {
+          axios
+            .get("http://localhost:5000/todos")
+            .then((res) => setData(res.data))
+            .catch((err) => console.log(err));
+        }
+        GetData();
+        function handelAddTask() {
+          let task = { title: inputData, status: false };
+          console.log(task);
+          axios
+            .post("http://localhost:5000/todos", task)
+            .then(() => console.log("Task Added"))
+            .catch(() => console.log("Failed to add...."));
+        }
+        function handelChange(el, i) {
+          console.log(el);
+          console.log({ ...el, status: true });
+          axios
+            .patch(`http://localhost:5000/todos/` + el.id, {
+              ...el,
+              status: !el.status,
+            })
+            .then(() => console.log("Task Updated"))
+            .catch(() => console.log("Failed to update..."));
+        }
+        function handelFiletr(e){
+          console.log(e.target.value);
+          const status = e.target.value
+          console.log(`http://localhost:5000/todos?status=${status}`)
+          // .get("http://localhost:5000/todos?status="+status)
+          axios
+            .get(`http://localhost:5000/todos?status=${status}`)
+            .then((res) => setData(res.data))
+            .catch((err) => console.log(err));
+        }
+        return (
+          <>
+          <select onChange={(e)=>handelFiletr(e)}>
+            <option value="">FIlter task based on status</option>
+              <option value="true">Completed</option>
+              <option value="false">Not Completed</option>
+            </select>
+            <div>
+              <input
+                type="text"
+                id="task"
+                placeholder="Enter the Task"
+                onChange={(e) => setInputData(e.target.value)}
+                value={inputData}
+              />
+              <button onClick={handelAddTask}>Add Task</button>
+            </div>
+            <div>
+              <ul>
+                {data.map((el, i) => (
+                  <li key={i}>
+                    {el.title}{" "}
+                    <span onClick={() => handelChange(el, i)}>{" "}
+                      status :- {el.status ? "Completed" : "pending"}
+                    </span>{" "}
+                    <button >Modify</button>
+                    <button onClick={() => axios.delete(`http://localhost:5000/todos/` + el.id)}>Delete</button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </>
+        );
+      }
+      let rootElement = document.getElementById("root");
+      ReactDOM.createRoot(rootElement).render(<App />);
+    </script>
+  </body>
+</html>
