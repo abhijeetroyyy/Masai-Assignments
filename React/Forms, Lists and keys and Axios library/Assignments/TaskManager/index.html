@@ -1,92 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
-    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="text/babel">
-      function App() {
-        const [inputData, setInputData] = React.useState("");
-        const [data, setData] = React.useState([]);
-        function GetData() {
-          axios
-            .get("http://localhost:5000/todos")
-            .then((res) => setData(res.data))
-            .catch((err) => console.log(err));
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Manager</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function TaskManager() {
+      const [tasks, setTasks] = useState([]);
+      const [newTask, setNewTask] = useState({ title: "", isCompleted: false, assignee: "" });
+      const [filterAssignee, setFilterAssignee] = useState("");
+
+      useEffect(() => {
+        getAllTasks();
+      }, []);
+
+      const getAllTasks = () => {
+        axios.get("http://localhost:5000/todos")
+          .then(response => {
+            setTasks(response.data);
+          })
+          .catch(error => {
+            console.error("Error fetching tasks:", error);
+          });
+      };
+
+      const addTask = (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
+        axios.post("http://localhost:5000/todos", newTask)
+          .then(response => {
+            setNewTask({ title: "", isCompleted: false, assignee: "" });
+            getAllTasks(); // Refresh the task list after adding a new task
+          })
+          .catch(error => {
+            console.error("Error adding task:", error);
+          });
+      };
+
+      const updateTask = (taskId, updatedTask) => {
+        axios.put(`http://localhost:5000/todos/${taskId}`, updatedTask)
+          .then(response => {
+            getAllTasks(); // Refresh the task list after updating a task
+          })
+          .catch(error => {
+            console.error("Error updating task:", error);
+          });
+      };
+
+      const deleteTask = (taskId) => {
+        axios.delete(`http://localhost:5000/todos/${taskId}`)
+          .then(response => {
+            getAllTasks(); // Refresh the task list after deleting a task
+          })
+          .catch(error => {
+            console.error("Error deleting task:", error);
+          });
+      };
+
+      const filterTasks = (task) => {
+        if (filterAssignee === "") {
+          return true; // If no filter is applied, show all tasks
+        } else {
+          return task.assignee === filterAssignee;
         }
-        GetData();
-        function handelAddTask() {
-          let task = { title: inputData, status: false };
-          console.log(task);
-          axios
-            .post("http://localhost:5000/todos", task)
-            .then(() => console.log("Task Added"))
-            .catch(() => console.log("Failed to add...."));
-        }
-        function handelChange(el, i) {
-          console.log(el);
-          console.log({ ...el, status: true });
-          axios
-            .patch(`http://localhost:5000/todos/` + el.id, {
-              ...el,
-              status: !el.status,
-            })
-            .then(() => console.log("Task Updated"))
-            .catch(() => console.log("Failed to update..."));
-        }
-        function handelFiletr(e){
-          console.log(e.target.value);
-          const status = e.target.value
-          console.log(`http://localhost:5000/todos?status=${status}`)
-          // .get("http://localhost:5000/todos?status="+status)
-          axios
-            .get(`http://localhost:5000/todos?status=${status}`)
-            .then((res) => setData(res.data))
-            .catch((err) => console.log(err));
-        }
-        return (
-          <>
-          <select onChange={(e)=>handelFiletr(e)}>
-            <option value="">FIlter task based on status</option>
-              <option value="true">Completed</option>
-              <option value="false">Not Completed</option>
-            </select>
-            <div>
-              <input
-                type="text"
-                id="task"
-                placeholder="Enter the Task"
-                onChange={(e) => setInputData(e.target.value)}
-                value={inputData}
-              />
-              <button onClick={handelAddTask}>Add Task</button>
-            </div>
-            <div>
-              <ul>
-                {data.map((el, i) => (
-                  <li key={i}>
-                    {el.title}{" "}
-                    <span onClick={() => handelChange(el, i)}>{" "}
-                      status :- {el.status ? "Completed" : "pending"}
-                    </span>{" "}
-                    <button >Modify</button>
-                    <button onClick={() => axios.delete(`http://localhost:5000/todos/` + el.id)}>Delete</button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </>
-        );
-      }
-      let rootElement = document.getElementById("root");
-      ReactDOM.createRoot(rootElement).render(<App />);
-    </script>
-  </body>
+      };
+
+      const handleAddTask = (e) => {
+        addTask(e);
+      };
+
+      const handleUpdateTask = (taskId, updatedTask) => {
+        updateTask(taskId, updatedTask);
+      };
+
+      const handleDeleteTask = (taskId) => {
+        deleteTask(taskId);
+      };
+
+      const handleFilterChange = (e) => {
+        setFilterAssignee(e.target.value);
+      };
+
+      return (
+        <div>
+          <h1>Task Manager</h1>
+          <div>
+            <form onSubmit={addTask}>
+              <input type="text" value={newTask.title} onChange={(e) => setNewTask({ ...newTask, title: e.target.value })} placeholder="Title" />
+              <input type="text" value={newTask.assignee} onChange={(e) => setNewTask({ ...newTask, assignee: e.target.value })} placeholder="Assignee" />
+              <button type="submit">Add Task</button>
+            </form>
+          </div>
+          <div>
+            <button onClick={() => setFilterAssignee("")}>Show All Tasks</button>
+            <input type="text" value={filterAssignee} onChange={handleFilterChange} placeholder="Filter by Assignee" />
+          </div>
+          <ul>
+            {tasks.filter(filterTasks).map(task => (
+              <li key={task.id}>
+                <input type="checkbox" checked={task.isCompleted} onChange={(e) => handleUpdateTask(task.id, { ...task, isCompleted: e.target.checked })} />
+                <span>{task.title}</span>
+                <span>{task.assignee}</span>
+                <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<TaskManager />);
+  </script>
+</body>
 </html>

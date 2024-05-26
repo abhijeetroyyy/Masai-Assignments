@@ -1,14 +1,10 @@
 {
   "todos": [
     {
-      "title": "Abhijeet",
-      "status": false,
-      "id": 1
-    },
-    {
-      "title": "1st task",
-      "status": true,
-      "id": 2
+      "id": "a366",
+      "title": "Wake Up early",
+      "assignee": "6:00",
+      "isCompleted": false
     }
   ]
 }
