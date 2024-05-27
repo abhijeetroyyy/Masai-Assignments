@@ -39,7 +39,7 @@ function Posts() {
       <h1>List of Posts</h1>
 
       {posts.map((post)=>(
-        <Post ket={post.id} {...post}/>
+        <Post key={post.id} {...post}/>
       ))}
     </div>
   );
