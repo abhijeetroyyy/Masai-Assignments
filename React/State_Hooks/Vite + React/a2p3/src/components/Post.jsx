@@ -3,7 +3,6 @@ function Post({ title, body }) {
     <div>
       <p>Title : {title}</p>
       <p>Body : {body}</p>
-      <hr />
     </div>
   );
 }
