@@ -32,7 +32,7 @@ const HomePage = () => {
       setLoading(true);
       try {
         const response = await axios.get('https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-products');
-        setProducts(response.data.data); // Assuming response.data contains an array named 'data'
+        setProducts(response.data.data); 
       } catch (error) {
         setError('Failed to fetch products. Please try again later.');
       } finally {
