@@ -130,5 +130,4 @@ if (operation === 'read') {
   console.log("Invalid operation. Please use read, create, delete, append, rename, or list.");
 }
 
-// Create a dummy file for testing
-// fs.writeFileSync('./text.txt', 'Initial content'); 
+
