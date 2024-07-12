@@ -1,0 +1,19 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "John",
+            "age": 20,
+            "gender": "Male",
+            "address": "New York"
+        },
+        {
+            "name": "Abhijeet",
+            "Age": 20
+        },
+        {
+            "city": "new alipurduar",
+            "state": "West bengal"
+        }
+    ]
+}

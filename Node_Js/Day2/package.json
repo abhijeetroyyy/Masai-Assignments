@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  },
+  "name": "day2",
+  "version": "1.0.0",
+  "description": "1. What is a server ?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "express":"nodemon express.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

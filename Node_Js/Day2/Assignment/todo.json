@@ -1,0 +1,40 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "Buy groceries",
+      "description": "Milk, Bread, Butter",
+      "status": false
+    },
+    {
+      "id": 3,
+      "title": "Call mom",
+      "description": "Check in and chat",
+      "status": false
+    },
+    {
+      "id": 5,
+      "title": "Read a book",
+      "description": "Finish reading '1984'",
+      "status": false
+    },
+    {
+      "id": 7,
+      "title": "Clean the house",
+      "description": "Vacuum and dust all rooms",
+      "status": false
+    },
+    {
+      "id": 9,
+      "title": "Visit the dentist",
+      "description": "Routine check-up appointment",
+      "status": false
+    },
+    {
+      "id": 11,
+      "title": "Learn Middleware.js",
+      "description": "Middleware.js Concept clearly",
+      "status": false
+    }
+  ]
+}
