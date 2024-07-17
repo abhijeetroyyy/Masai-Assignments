@@ -1,0 +1,4 @@
+GET /get-users 200 13 - 5.134 ms - HTTP/1.1
+POST /add-user 201 23 - 0.918 ms - HTTP/1.1
+GET /get-users 304 - - 1.680 ms - HTTP/1.1
+GET //user/:id 404 148 - 6.893 ms - HTTP/1.1
