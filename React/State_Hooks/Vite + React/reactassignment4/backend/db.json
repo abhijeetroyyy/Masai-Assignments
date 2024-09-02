@@ -1,14 +1,6 @@
 {
   "tickets": [
     {
-      "title": "Setup development environment",
-      "description": "Install necessary software and tools for development.",
-      "assignee": "John",
-      "status": "pending",
-      "priority": "2",
-      "id": "1"
-    },
-    {
       "id": "2",
       "title": "Fix login bug",
       "description": "Resolve the issue causing login failures.",
@@ -73,12 +65,12 @@
       "priority": 9
     },
     {
-      "id": "10",
-      "title": "Create unit tests",
-      "description": "Write unit tests for all modules.",
+      "title": "Create unit tests of rgu",
+      "description": "Write unit tests for all modules. ABC",
+      "assignee": "Michael",
       "status": "completed",
-      "assignee": "John",
-      "priority": 0
+      "priority": "3",
+      "id": "10"
     },
     {
       "id": "b4a3",
@@ -89,20 +81,28 @@
       "priority": "7"
     },
     {
-      "id": "2557",
-      "title": "problem",
-      "description": "fas gya",
-      "assignee": "William",
-      "status": "Pending",
-      "priority": "0"
-    },
-    {
       "id": "5c18",
       "title": "Work on it",
       "description": "Learn full front end ",
       "assignee": "Emma",
       "status": "Progress",
       "priority": "7"
+    },
+    {
+      "id": "f04e",
+      "title": "hello my name is Abhijeer",
+      "description": "heiillll",
+      "assignee": "Michael",
+      "status": "Completed",
+      "priority": "6"
+    },
+    {
+      "id": "2961",
+      "title": "hiii",
+      "description": "my name is abhijeet",
+      "assignee": "Emma",
+      "status": "Completed",
+      "priority": "3"
     }
   ]
 }

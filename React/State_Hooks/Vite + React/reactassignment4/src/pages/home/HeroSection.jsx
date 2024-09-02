@@ -4,7 +4,7 @@ import { Box, Heading, Text, Button, VStack } from '@chakra-ui/react';
 const HeroSection = () => {
   return (
     <Box
-      bgImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2BjFcg6Sp0FkUslmmrCuWQQPFlTn0e23efg&s"
+      bgImage="https://www.shutterstock.com/image-vector/beautiful-mountains-landscape-blue-gradient-260nw-2205396015.jpg"
       bgSize="cover"
       color="white"
       textAlign="center"

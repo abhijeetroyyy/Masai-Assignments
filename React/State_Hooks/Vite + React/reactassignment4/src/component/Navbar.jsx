@@ -28,7 +28,7 @@ const Navbar = () => {
 
   return (
     <>
-      <Flex align="center" justify="space-around" p="20px" bg="aqua">
+      <Flex align="center" justify="space-around" p="20px" bg="gray.100">
         {links.map((link) => (
           <ChakraLink
             _hover={{ textDecoration: "none" }}
